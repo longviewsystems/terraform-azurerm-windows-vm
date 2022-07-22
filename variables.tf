@@ -1,15 +1,3 @@
-variable "tenant_id" {
-  type        = string
-  description = "Tenant ID"
-  #sample     = "5806bd64-fde5-449f-9a07-############"
-}
-
-variable "subscription_id" {
-  type        = string
-  description = "Subscription ID"
-  #sample  default   = "57215661-2f9e-482f-9334-############"
-}
-
 /*********************************************************
 *** VM Details
 *********************************************************/
@@ -56,17 +44,10 @@ variable "availability_set_id" {
 *** Variables related to TAGS
 *********************************************************/
 
-variable "tags_customer_sub" {
+variable "tags" {
   type        = map(any)
   description = "These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID."
   default     = {}
-}
-
-#TODO: Make sure this value is set. It doesn't look like it is.  
-variable "SRId" {
-  type        = string
-  description = "This is the Order ID of the DWPa Service Request to build the Azure Resource."
-  default     = ""
 }
 
 /*********************************************************
@@ -238,10 +219,4 @@ variable "backup_vault_policy_name" {
   type        = string
   description = "Resource Group of the Backup Vault referenced in backup_vault_name."
   default     = "" #DefaultPolicy
-}
-
-variable "tags" {
-  type        = map(any)
-  description = "A mapping of tags to assign to the Virtual Machine."
-  default     = {}
 }

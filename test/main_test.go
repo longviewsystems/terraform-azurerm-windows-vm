@@ -7,12 +7,10 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestTerraformWindowsVM(t *testing.T) {
+func TestTerraform(t *testing.T) {
 	options := &terraform.Options{
-		TerraformDir: "../",
-
-		// Variables to pass to our Terraform code using -var-file options
-		VarFiles: []string{"examples/windows-vm.tfvars"},
+		TerraformDir: "./fixture",
+		// VarFiles     : []string{"./test/fixture/test.tfvars"},            
 	}
 
 	defer terraform.Destroy(t, options)

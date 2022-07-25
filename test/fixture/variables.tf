@@ -1,7 +1,7 @@
 variable "location" {
   type        = string
   description = "Location used to deploy the resources"
-  default     = "westus2"
+  default     = "westcentralus"
 }
 
 variable "tags" {

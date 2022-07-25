@@ -131,24 +131,6 @@ variable "subnet_id" {
   #sample: /subscriptions/57215661-2f9e-482f-9334-c092e02651ec/resourceGroups/RG-CORENETWORK-PROD-01/providers/Microsoft.Network/virtualNetworks/vnet-cor1-westus2-01/subnets/snet-Apps-cor1-westus2-01
 }
 
-# variable "vnet_resource_group_name" {
-#   type        = string
-#   description = "VNET Resource Group Name"
-#   default     = "AZRG-NETWORK-DEV"
-# }
-
-# variable "vnet_name" {
-#   type        = string
-#   description = "Name for the VNET"
-#   default     = "AZ-DEV-VNT"
-# }
-
-# variable "vnet_Subnet_name" {
-#   type        = string
-#   description = "Subnet Name for the Vnet"
-#   default     = "AZ-DEV-NONPCF-SBN"
-# }
-
 /*********************************************************
 *** Key Vault for VM Password
 *********************************************************/
@@ -159,16 +141,39 @@ variable "store_admin_password_in_KV" {
   default     = false
 }
 
-variable "PW_key_vault_name" {
-  type        = string
-  description = "The name of the Key Vault where the password will be stored."
-  default     = ""
+variable "admin_password_kv_id" {
+  type = string
+  description = "The ID of Key Vault where the password will be stored."
+  default = null
 }
 
-variable "PW_key_vault_resource_group" {
-  type        = string
-  description = "The name of the Resource Group that holds the Key Vault to be used for password storage."
-  default     = ""
+
+# variable "PW_key_vault_name" {
+#   type        = string
+#   description = "The name of the Key Vault where the password will be stored."
+#   default     = ""
+# }
+
+# variable "PW_key_vault_resource_group" {
+#   type        = string
+#   description = "The name of the Resource Group that holds the Key Vault to be used for password storage."
+#   default     = ""
+# }
+
+/*********************************************************
+*** Enable Extensions
+*********************************************************/
+
+variable "enable_InitializeDisks_extension" {
+  type        = bool
+  description = "Enable the PS script that initializes attached disks."
+  default     = true 
+}
+
+variable "enable_iaasantimalware_extension" {
+  type        = bool
+  description = "Enable the PS script that initializes attached disks."
+  default     = true 
 }
 
 /*********************************************************

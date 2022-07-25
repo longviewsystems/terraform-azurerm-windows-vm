@@ -7,12 +7,6 @@ locals {
 
 }
 
-data "azurerm_key_vault" "PWkeyvault" {
-  count               = local.UseKV
-  name                = var.PW_key_vault_name
-  resource_group_name = var.PW_key_vault_resource_group
-}
-
 resource "random_password" "password" {
   length           = 16
   special          = true
@@ -23,7 +17,7 @@ resource "azurerm_key_vault_secret" "password" {
   count           = local.UseKV
   name            = azurerm_windows_virtual_machine.main.name
   value           = local.passwordToUse #random_password.password.result
-  key_vault_id    = data.azurerm_key_vault.PWkeyvault[0].id
-  content_type    = "randomized VM password"
-  expiration_date = "2021-12-31T23:59:59Z"
+  key_vault_id    = var.admin_password_kv_id
+  content_type    = "text/plain"
+  //expiration_date = "2021-12-31T23:59:59Z"
 }

@@ -40,6 +40,18 @@ variable "availability_set_id" {
   #sample     = "/subscriptions/57215661-2f9e-482f-9334-c092e02651ec/resourceGroups/RG-CORECOMPUTE-PROD-01/providers/Microsoft.Compute/availabilitySets/av-set-02"
 }
 
+variable "vm_nic_naming_suffix" {
+  type = string
+  description = "The suffix for the network card nic name"
+  default = "-NIC"
+}
+
+variable "vm_nic_config_naming_suffix" {
+  type = string
+  description = "The suffix for the network card nic name"
+  default = "-config"
+}
+
 /*********************************************************
 *** Variables related to TAGS
 *********************************************************/
@@ -67,6 +79,12 @@ variable "use_dynamic_plan" {
   description = "If true, the image details (publisher, offer, etc.) will be used in by a plan block which describes a Marketplace Image."
 }
 
+variable "os_disk_suffix" {
+  type = string
+  description = "Suffix to be used for OS disk name."
+  default = "-OSDISK"
+  
+}
 
 /*********************************************************
 *** OS Disk variables

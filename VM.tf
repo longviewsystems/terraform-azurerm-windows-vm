@@ -10,11 +10,11 @@ locals {
 # Create network interface
 resource "azurerm_network_interface" "nic" {
 
-  name                = "${var.vm_name}-NIC"
+  name                = "${var.vm_name}${var.vm_nic_naming_suffix}"
   location            = data.azurerm_virtual_network.net.location
   resource_group_name = data.azurerm_resource_group.resourcegroup.name
   ip_configuration {
-    name                          = "${var.resource_group_name}-NicConfiguration"
+    name                          = "${var.vm_name}${var.vm_nic_config_naming_suffix}"
     subnet_id                     = data.azurerm_subnet.net.id
     private_ip_address_allocation = "Dynamic"
   }
@@ -71,7 +71,7 @@ resource "azurerm_windows_virtual_machine" "main" {
   }
 
   os_disk {
-    name                 = "${var.vm_name}-OSDISK"
+    name                 = "${var.vm_name}${var.os_disk_suffix}"
     caching              = var.os_disk_caching
     storage_account_type = var.os_disk_managed_disk_type
     disk_size_gb         = var.os_disk_disk_size_gb

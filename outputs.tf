@@ -6,7 +6,6 @@ output "rg_name" {
   description = "Resource Group Name"
 }
 
-
 output "rg_id" {
   value       = data.azurerm_resource_group.resourcegroup.id
   description = "Resource Group ID"

@@ -45,14 +45,16 @@ module "vm_test_2b" {
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.8 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 2.88.1 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.1 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | 3.3.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
 | <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 2.88.1 |
-| <a name="provider_null"></a> [null](#provider\_null) | n/a |
-| <a name="provider_random"></a> [random](#provider\_random) | n/a |
+| <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.3.2 |
 
 ## Modules
 
@@ -72,8 +74,8 @@ module "vm_test_2b" {
 | [azurerm_virtual_machine_extension.ADE](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension) | resource |
 | [azurerm_virtual_machine_extension.IaaSAntimalware](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/virtual_machine_extension) | resource |
 | [azurerm_windows_virtual_machine.main](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine) | resource |
-| [null_resource.delay](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
-| [random_password.password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password) | resource |
+| [null_resource.delay](https://registry.terraform.io/providers/hashicorp/null/3.1.1/docs/resources/resource) | resource |
+| [random_password.password](https://registry.terraform.io/providers/hashicorp/random/3.3.2/docs/resources/password) | resource |
 | [azurerm_backup_policy_vm.protection_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/backup_policy_vm) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 | [azurerm_key_vault.disks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault) | data source |
@@ -110,6 +112,7 @@ module "vm_test_2b" {
 | <a name="input_tags"></a> [tags](#input\_tags) | These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID. | `map(any)` | `{}` | no |
 | <a name="input_use_dynamic_plan"></a> [use\_dynamic\_plan](#input\_use\_dynamic\_plan) | If true, the image details (publisher, offer, etc.) will be used in by a plan block which describes a Marketplace Image. | `bool` | `false` | no |
 | <a name="input_vm_name"></a> [vm\_name](#input\_vm\_name) | The name of the virtual machine to be created. | `string` | n/a | yes |
+| <a name="input_vm_nic_naming_suffix"></a> [vm\_nic\_naming\_suffix](#input\_vm\_nic\_naming\_suffix) | value | `any` | n/a | yes |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size) | Azure VM size. example 'Standard\_DS2s\_v2'. | `string` | n/a | yes |
 
 ## Outputs

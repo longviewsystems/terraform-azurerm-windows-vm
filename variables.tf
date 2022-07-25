@@ -142,23 +142,10 @@ variable "store_admin_password_in_KV" {
 }
 
 variable "admin_password_kv_id" {
-  type = string
+  type        = string
   description = "The ID of Key Vault where the password will be stored."
-  default = null
+  default     = null
 }
-
-
-# variable "PW_key_vault_name" {
-#   type        = string
-#   description = "The name of the Key Vault where the password will be stored."
-#   default     = ""
-# }
-
-# variable "PW_key_vault_resource_group" {
-#   type        = string
-#   description = "The name of the Resource Group that holds the Key Vault to be used for password storage."
-#   default     = ""
-# }
 
 /*********************************************************
 *** Enable Extensions
@@ -167,13 +154,13 @@ variable "admin_password_kv_id" {
 variable "enable_InitializeDisks_extension" {
   type        = bool
   description = "Enable the PS script that initializes attached disks."
-  default     = true 
+  default     = true
 }
 
 variable "enable_iaasantimalware_extension" {
   type        = bool
   description = "Enable the PS script that initializes attached disks."
-  default     = true 
+  default     = true
 }
 
 /*********************************************************

@@ -46,12 +46,12 @@ resource "azurerm_subnet" "fixture_sn1" {
 /*   Availibity Set
 /*****************************************/
 resource "azurerm_availability_set" "fixture" {
-  name                = module.naming.availability_set.name_unique
-  location            = azurerm_resource_group.fixture.location
-  resource_group_name = azurerm_resource_group.fixture.name
-  platform_fault_domain_count = 2
+  name                         = module.naming.availability_set.name_unique
+  location                     = azurerm_resource_group.fixture.location
+  resource_group_name          = azurerm_resource_group.fixture.name
+  platform_fault_domain_count  = 2
   platform_update_domain_count = 2
-  tags                = var.tags
+  tags                         = var.tags
 }
 
 
@@ -105,7 +105,7 @@ resource "azurerm_key_vault" "fixture" {
   }
 
   network_acls {
-    bypass = "AzureServices"
+    bypass         = "AzureServices"
     default_action = "Allow"
     //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
   }

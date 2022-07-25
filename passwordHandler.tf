@@ -14,9 +14,9 @@ resource "random_password" "password" {
 }
 
 resource "azurerm_key_vault_secret" "password" {
-  count           = local.UseKV
-  name            = azurerm_windows_virtual_machine.main.name
-  value           = local.passwordToUse #random_password.password.result
-  key_vault_id    = var.admin_password_kv_id
-  content_type    = "text/plain"
+  count        = local.UseKV
+  name         = azurerm_windows_virtual_machine.main.name
+  value        = local.passwordToUse #random_password.password.result
+  key_vault_id = var.admin_password_kv_id
+  content_type = "text/plain"
 }

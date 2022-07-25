@@ -5,7 +5,7 @@ Setup the module for testing.
 */
 
 module "vm_test_1" {
-  source = "../../"
+  source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
 
   admin_password             = "" #blank means randomize it in the module.
@@ -30,13 +30,13 @@ module "vm_test_1" {
       lunID             = 13
     },
   }
-  
-  tags = var.tags
+
+  tags           = var.tags
   admin_username = "adminusername"
 }
 
 module "vm_test_2" {
-  source = "../../"
+  source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
 
   admin_password             = "" #blank means randomize it in the module.
@@ -49,15 +49,15 @@ module "vm_test_2" {
   Encrpyt_all_VM_Disks       = false
   vm_size                    = "Standard_D2s_v5"
   store_admin_password_in_KV = true
-  admin_password_kv_id = azurerm_key_vault.fixture.id
-  data_disk_details = {}
-  tags = var.tags
-  admin_username = "adminusername"
+  admin_password_kv_id       = azurerm_key_vault.fixture.id
+  data_disk_details          = {}
+  tags                       = var.tags
+  admin_username             = "adminusername"
 }
 
 
 module "vm_test_2b" {
-  source = "../../"
+  source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
 
   admin_password             = "" #blank means randomize it in the module.
@@ -70,8 +70,8 @@ module "vm_test_2b" {
   Encrpyt_all_VM_Disks       = false
   vm_size                    = "Standard_D2s_v5"
   store_admin_password_in_KV = true
-  admin_password_kv_id = azurerm_key_vault.fixture.id
-  data_disk_details = {}
-  tags = var.tags
-  admin_username = "adminusername"
+  admin_password_kv_id       = azurerm_key_vault.fixture.id
+  data_disk_details          = {}
+  tags                       = var.tags
+  admin_username             = "adminusername"
 }

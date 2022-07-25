@@ -2,9 +2,9 @@
 
 SHELL := /bin/bash
 
-test-windowsvm:
-	echo "Calling test-windowsvm"
-	go test -v -timeout 45m
+test-tf:	
+	echo "Calling tf"
+	go test -timeout 45m
 clean:
 	@find . -name terraform.tfstate -type f -exec rm -rf {} +
 	@find . -name terraform.tfstate.backup -type f -exec rm -rf {} +

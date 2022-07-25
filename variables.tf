@@ -1,15 +1,3 @@
-variable "tenant_id" {
-  type        = string
-  description = "Tenant ID"
-  #sample     = "5806bd64-fde5-449f-9a07-############"
-}
-
-variable "subscription_id" {
-  type        = string
-  description = "Subscription ID"
-  #sample  default   = "57215661-2f9e-482f-9334-############"
-}
-
 /*********************************************************
 *** VM Details
 *********************************************************/
@@ -52,21 +40,26 @@ variable "availability_set_id" {
   #sample     = "/subscriptions/57215661-2f9e-482f-9334-c092e02651ec/resourceGroups/RG-CORECOMPUTE-PROD-01/providers/Microsoft.Compute/availabilitySets/av-set-02"
 }
 
+variable "vm_nic_naming_suffix" {
+  type = string
+  description = "The suffix for the network card nic name"
+  default = "-NIC"
+}
+
+variable "vm_nic_config_naming_suffix" {
+  type = string
+  description = "The suffix for the network card nic name"
+  default = "-config"
+}
+
 /*********************************************************
 *** Variables related to TAGS
 *********************************************************/
 
-variable "tags_customer_sub" {
+variable "tags" {
   type        = map(any)
   description = "These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID."
   default     = {}
-}
-
-#TODO: Make sure this value is set. It doesn't look like it is.  
-variable "SRId" {
-  type        = string
-  description = "This is the Order ID of the DWPa Service Request to build the Azure Resource."
-  default     = ""
 }
 
 /*********************************************************
@@ -86,6 +79,12 @@ variable "use_dynamic_plan" {
   description = "If true, the image details (publisher, offer, etc.) will be used in by a plan block which describes a Marketplace Image."
 }
 
+variable "os_disk_suffix" {
+  type = string
+  description = "Suffix to be used for OS disk name."
+  default = "-OSDISK"
+  
+}
 
 /*********************************************************
 *** OS Disk variables
@@ -150,24 +149,6 @@ variable "subnet_id" {
   #sample: /subscriptions/57215661-2f9e-482f-9334-c092e02651ec/resourceGroups/RG-CORENETWORK-PROD-01/providers/Microsoft.Network/virtualNetworks/vnet-cor1-westus2-01/subnets/snet-Apps-cor1-westus2-01
 }
 
-# variable "vnet_resource_group_name" {
-#   type        = string
-#   description = "VNET Resource Group Name"
-#   default     = "AZRG-NETWORK-DEV"
-# }
-
-# variable "vnet_name" {
-#   type        = string
-#   description = "Name for the VNET"
-#   default     = "AZ-DEV-VNT"
-# }
-
-# variable "vnet_Subnet_name" {
-#   type        = string
-#   description = "Subnet Name for the Vnet"
-#   default     = "AZ-DEV-NONPCF-SBN"
-# }
-
 /*********************************************************
 *** Key Vault for VM Password
 *********************************************************/
@@ -178,16 +159,26 @@ variable "store_admin_password_in_KV" {
   default     = false
 }
 
-variable "PW_key_vault_name" {
+variable "admin_password_kv_id" {
   type        = string
-  description = "The name of the Key Vault where the password will be stored."
-  default     = ""
+  description = "The ID of Key Vault where the password will be stored."
+  default     = null
 }
 
-variable "PW_key_vault_resource_group" {
-  type        = string
-  description = "The name of the Resource Group that holds the Key Vault to be used for password storage."
-  default     = ""
+/*********************************************************
+*** Enable Extensions
+*********************************************************/
+
+variable "enable_InitializeDisks_extension" {
+  type        = bool
+  description = "Enable the PS script that initializes attached disks."
+  default     = true
+}
+
+variable "enable_iaasantimalware_extension" {
+  type        = bool
+  description = "Enable the PS script that initializes attached disks."
+  default     = true
 }
 
 /*********************************************************
@@ -238,10 +229,4 @@ variable "backup_vault_policy_name" {
   type        = string
   description = "Resource Group of the Backup Vault referenced in backup_vault_name."
   default     = "" #DefaultPolicy
-}
-
-variable "tags" {
-  type        = map(any)
-  description = "A mapping of tags to assign to the Virtual Machine."
-  default     = {}
 }

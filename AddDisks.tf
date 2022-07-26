@@ -5,7 +5,7 @@ module "AddDisks" {
   for_each            = var.data_disk_details
   source              = "./modules/addDisks_v1"
   disk_name           = "${var.vm_name}-disk${each.value["lunID"]}"
-  location            = data.azurerm_virtual_network.net.location
+  location            = var.location
   resource_group_name = var.resource_group_name
   virtual_machine_id  = azurerm_windows_virtual_machine.main.id
   disk_size_gb        = each.value["disk_size_gb"]

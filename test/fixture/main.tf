@@ -1,3 +1,5 @@
+data "azurerm_client_config" "current" {}
+
 /*
 
 Setup the module for testing.
@@ -7,6 +9,8 @@ Setup the module for testing.
 module "vm_test_1" {
   source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
+  location = var.location
+
 
   admin_password             = "" #blank means randomize it in the module.
   subnet_id                  = azurerm_subnet.fixture_sn1.id
@@ -38,6 +42,8 @@ module "vm_test_1" {
 module "vm_test_2" {
   source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
+location = var.location
+
 
   admin_password             = "" #blank means randomize it in the module.
   subnet_id                  = azurerm_subnet.fixture_sn1.id
@@ -59,6 +65,7 @@ module "vm_test_2" {
 module "vm_test_2b" {
   source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
+  location = var.location
 
   admin_password             = "" #blank means randomize it in the module.
   subnet_id                  = azurerm_subnet.fixture_sn1.id

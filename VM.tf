@@ -11,11 +11,11 @@ locals {
 resource "azurerm_network_interface" "nic" {
 
   name                = "${var.vm_name}${var.vm_nic_naming_suffix}"
-  location            = data.azurerm_virtual_network.net.location
-  resource_group_name = data.azurerm_resource_group.resourcegroup.name
+  location            = var.location
+  resource_group_name = var.resource_group_name
   ip_configuration {
     name                          = "${var.vm_name}${var.vm_nic_config_naming_suffix}"
-    subnet_id                     = data.azurerm_subnet.net.id
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
 
@@ -26,7 +26,7 @@ resource "azurerm_network_interface" "nic" {
 resource "azurerm_windows_virtual_machine" "main" {
   name                     = var.vm_name
   size                     = var.vm_size
-  location                 = data.azurerm_virtual_network.net.location
+  location                 = var.location
   resource_group_name      = var.resource_group_name
   network_interface_ids    = [azurerm_network_interface.nic.id]
   computer_name            = var.vm_name

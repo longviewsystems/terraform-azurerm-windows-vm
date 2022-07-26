@@ -24,8 +24,6 @@ resource "azurerm_key_vault_key" "disks" {
 resource "azurerm_virtual_machine_extension" "ADE" {
   count = var.Encrpyt_all_VM_Disks ? 1 : 0
   name  = "${var.vm_name}-ADE-Extension"
-  #location                      = data.azurerm_virtual_network.net.location
-  #resource_group_name           = var.vnet_resource_group_name
   virtual_machine_id         = azurerm_windows_virtual_machine.main.id
   publisher                  = "Microsoft.Azure.Security"
   type                       = "AzureDiskEncryption"

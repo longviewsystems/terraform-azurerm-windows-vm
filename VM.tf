@@ -19,7 +19,7 @@ resource "azurerm_network_interface" "nic" {
     private_ip_address_allocation = "Dynamic"
   }
 
-  tags = {}
+  tags = var.tags
 }
 
 # Create virtual machine

@@ -44,7 +44,7 @@ module "vm_test_2b" {
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.8 |
-| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 2.88.1 |
+| <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >=2.99, <3.0.0 |
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.3.2 |
 
@@ -52,7 +52,7 @@ module "vm_test_2b" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >= 2.88.1 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >=2.99, <3.0.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.3.2 |
 
@@ -79,10 +79,7 @@ module "vm_test_2b" {
 | [azurerm_backup_policy_vm.protection_policy](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/backup_policy_vm) | data source |
 | [azurerm_client_config.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/client_config) | data source |
 | [azurerm_key_vault.disks](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/key_vault) | data source |
-| [azurerm_resource_group.resourcegroup](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/resource_group) | data source |
-| [azurerm_subnet.net](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subnet) | data source |
 | [azurerm_subscription.current](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/subscription) | data source |
-| [azurerm_virtual_network.net](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/data-sources/virtual_network) | data source |
 
 ## Inputs
 
@@ -103,28 +100,25 @@ module "vm_test_2b" {
 | <a name="input_enable_InitializeDisks_extension"></a> [enable\_InitializeDisks\_extension](#input\_enable\_InitializeDisks\_extension) | Enable the PS script that initializes attached disks. | `bool` | `true` | no |
 | <a name="input_enable_iaasantimalware_extension"></a> [enable\_iaasantimalware\_extension](#input\_enable\_iaasantimalware\_extension) | Enable the PS script that initializes attached disks. | `bool` | `true` | no |
 | <a name="input_image_URN"></a> [image\_URN](#input\_image\_URN) | Azure Image Publisher, Offer, SKU, and Version in one string separate by a colon (:).  I.e 'Publisher:Offer:Sku:Version'.  Further information here - https://docs.microsoft.com/en-us/azure/virtual-machines/windows/cli-ps-findimage | `string` | n/a | yes |
+| <a name="input_location"></a> [location](#input\_location) | Location of the Virtual Machine. | `string` | n/a | yes |
 | <a name="input_os_disk_caching"></a> [os\_disk\_caching](#input\_os\_disk\_caching) | The type of disk cahcing enabled on the OS disk. | `string` | `"ReadWrite"` | no |
 | <a name="input_os_disk_disk_size_gb"></a> [os\_disk\_disk\_size\_gb](#input\_os\_disk\_disk\_size\_gb) | The size of the OS disk. | `string` | `"127"` | no |
 | <a name="input_os_disk_managed_disk_type"></a> [os\_disk\_managed\_disk\_type](#input\_os\_disk\_managed\_disk\_type) | The type of disk to use for the OS disk. | `string` | `"StandardSSD_LRS"` | no |
+| <a name="input_os_disk_suffix"></a> [os\_disk\_suffix](#input\_os\_disk\_suffix) | Suffix to be used for OS disk name. | `string` | `"-OSDISK"` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Resource Group for the virtual machine. | `string` | n/a | yes |
 | <a name="input_store_admin_password_in_KV"></a> [store\_admin\_password\_in\_KV](#input\_store\_admin\_password\_in\_KV) | True value stores the password in a Key Vault for safe keeping.  If the admin\_password is blank, then a random password will be generated and may need to be stored for use. | `bool` | `false` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet ID of the subnet to join the VM to. | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID. | `map(any)` | `{}` | no |
 | <a name="input_use_dynamic_plan"></a> [use\_dynamic\_plan](#input\_use\_dynamic\_plan) | If true, the image details (publisher, offer, etc.) will be used in by a plan block which describes a Marketplace Image. | `bool` | `false` | no |
 | <a name="input_vm_name"></a> [vm\_name](#input\_vm\_name) | The name of the virtual machine to be created. | `string` | n/a | yes |
-| <a name="input_vm_nic_naming_suffix"></a> [vm\_nic\_naming\_suffix](#input\_vm\_nic\_naming\_suffix) | value | `any` | n/a | yes |
+| <a name="input_vm_nic_config_naming_suffix"></a> [vm\_nic\_config\_naming\_suffix](#input\_vm\_nic\_config\_naming\_suffix) | The suffix for the network card nic name | `string` | `"-config"` | no |
+| <a name="input_vm_nic_naming_suffix"></a> [vm\_nic\_naming\_suffix](#input\_vm\_nic\_naming\_suffix) | The suffix for the network card nic name | `string` | `"-NIC"` | no |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size) | Azure VM size. example 'Standard\_DS2s\_v2'. | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_rg_id"></a> [rg\_id](#output\_rg\_id) | Resource Group ID |
-| <a name="output_rg_name"></a> [rg\_name](#output\_rg\_name) | Resource Group Name |
-| <a name="output_subnet_id"></a> [subnet\_id](#output\_subnet\_id) | Subnet ID |
-| <a name="output_subnet_name"></a> [subnet\_name](#output\_subnet\_name) | Subnet name |
 | <a name="output_virtual_machine_id"></a> [virtual\_machine\_id](#output\_virtual\_machine\_id) | Windows VM ID |
 | <a name="output_virtual_machine_name"></a> [virtual\_machine\_name](#output\_virtual\_machine\_name) | Windows VM name |
-| <a name="output_vnet_id"></a> [vnet\_id](#output\_vnet\_id) | vNet ID |
-| <a name="output_vnet_name"></a> [vnet\_name](#output\_vnet\_name) | vNet Name |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

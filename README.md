@@ -108,7 +108,7 @@ module "vm_test_2b" {
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The Resource Group for the virtual machine. | `string` | n/a | yes |
 | <a name="input_store_admin_password_in_KV"></a> [store\_admin\_password\_in\_KV](#input\_store\_admin\_password\_in\_KV) | True value stores the password in a Key Vault for safe keeping.  If the admin\_password is blank, then a random password will be generated and may need to be stored for use. | `bool` | `false` | no |
 | <a name="input_subnet_id"></a> [subnet\_id](#input\_subnet\_id) | Subnet ID of the subnet to join the VM to. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID. | `map(any)` | `{}` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be applied to all resources. | `map(any)` | `{}` | no |
 | <a name="input_use_dynamic_plan"></a> [use\_dynamic\_plan](#input\_use\_dynamic\_plan) | If true, the image details (publisher, offer, etc.) will be used in by a plan block which describes a Marketplace Image. | `bool` | `false` | no |
 | <a name="input_vm_name"></a> [vm\_name](#input\_vm\_name) | The name of the virtual machine to be created. | `string` | n/a | yes |
 | <a name="input_vm_nic_config_naming_suffix"></a> [vm\_nic\_config\_naming\_suffix](#input\_vm\_nic\_config\_naming\_suffix) | The suffix for the network card nic name | `string` | `"-config"` | no |

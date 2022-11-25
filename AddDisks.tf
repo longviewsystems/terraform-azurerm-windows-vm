@@ -14,4 +14,6 @@ module "AddDisks" {
   caching             = "ReadWrite"
   #disk_encryption_set_id = var.Encrpyt_all_VM_Disks ? azurerm_disk_encryption_set.disks[0].id : ""
 
+  tags = var.tags
+
 }

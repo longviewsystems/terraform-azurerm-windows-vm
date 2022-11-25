@@ -14,6 +14,8 @@ resource "azurerm_managed_disk" "disk" {
     ]
   }
 
+  tags = var.tags
+
 }
 
 resource "azurerm_virtual_machine_data_disk_attachment" "disk" {

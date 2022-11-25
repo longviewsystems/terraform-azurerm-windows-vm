@@ -124,22 +124,22 @@ variable "data_disk_details" {
 
 /* SAMPLES
     Sample of 0 disks.
-    default = []   
+    data_disk_details = {}   
     }
 
     Sample of 2 disks.
-      default = [
-        {
+    data_disk_details = {
+        disk1= {
           disk_size_gb      = 100,
-          managed_disk_type = "StandardSSD_LRS"
-          lunID             = 10
+          managed_disk_type = "StandardSSD_LRS",
+          lunID             = 10,
         },
-        {
+        disk2 = {
           disk_size_gb      = 100,
-          managed_disk_type = "StandardSSD_LRS"
-          lunID             = 11
+          managed_disk_type = "StandardSSD_LRS",
+          lunID             = 11,
         }
-      ]
+  }
   */
 
 

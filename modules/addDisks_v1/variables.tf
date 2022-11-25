@@ -53,3 +53,9 @@ variable "disk_encryption_set_id" {
   default     = ""
   description = "The ID of the Disk Encryption Set used to encrypt this Managed Disk.  If the valu is an empty string, the disks will not be encryted."
 }
+
+variable "tags" {
+  type        = map(any)
+  description = "Tags to be applied to all resources."
+  default     = {}
+}

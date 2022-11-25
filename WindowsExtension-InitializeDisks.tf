@@ -9,7 +9,7 @@ module "InitializeDisks" {
     module.AddDisks
   ]
 
-  tags = var.tags
+  //tags = var.tags
 
 }
 

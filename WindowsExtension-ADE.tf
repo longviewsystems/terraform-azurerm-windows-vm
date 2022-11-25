@@ -47,4 +47,7 @@ resource "azurerm_virtual_machine_extension" "ADE" {
   depends_on = [
     module.InitializeDisks
   ]
+
+  tags = var.tags
+
 }

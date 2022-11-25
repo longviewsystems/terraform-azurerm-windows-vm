@@ -15,7 +15,7 @@ variable "resource_group_name" {
 }
 
 variable "location" {
-  type = string
+  type        = string
   description = "Location of the Virtual Machine."
 }
 
@@ -46,15 +46,15 @@ variable "availability_set_id" {
 }
 
 variable "vm_nic_naming_suffix" {
-  type = string
+  type        = string
   description = "The suffix for the network card nic name"
-  default = "-NIC"
+  default     = "-NIC"
 }
 
 variable "vm_nic_config_naming_suffix" {
-  type = string
+  type        = string
   description = "The suffix for the network card nic name"
-  default = "-config"
+  default     = "-config"
 }
 
 /*********************************************************
@@ -85,10 +85,10 @@ variable "use_dynamic_plan" {
 }
 
 variable "os_disk_suffix" {
-  type = string
+  type        = string
   description = "Suffix to be used for OS disk name."
-  default = "-OSDISK"
-  
+  default     = "-OSDISK"
+
 }
 
 /*********************************************************
@@ -148,7 +148,7 @@ variable "data_disk_details" {
 *********************************************************/
 
 variable "subnet_id" {
-  type = string
+  type        = string
   description = "Subnet ID of the subnet to join the VM to."
   #sample: /subscriptions/57215661-2f9e-482f-9334-c092e02651ec/resourceGroups/RG-CORENETWORK-PROD-01/providers/Microsoft.Network/virtualNetworks/vnet-cor1-westus2-01/subnets/snet-Apps-cor1-westus2-01
 }

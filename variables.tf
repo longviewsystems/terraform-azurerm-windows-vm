@@ -63,7 +63,7 @@ variable "vm_nic_config_naming_suffix" {
 
 variable "tags" {
   type        = map(any)
-  description = "These tags can be set in SubID.auto.tfvars.json.  They will apply to all Azure Resources built in a subscription matching the subID."
+  description = "Tags to be applied to all resources."
   default     = {}
 }
 

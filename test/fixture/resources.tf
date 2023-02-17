@@ -88,7 +88,7 @@ resource "azurerm_key_vault" "fixture" {
 
   sku_name = "standard"
 
-  /*access_policy {
+  access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
@@ -103,11 +103,11 @@ resource "azurerm_key_vault" "fixture" {
     storage_permissions = [
       "Get",
     ]
-  }*/
+  }
 
-  # network_acls {
-  #   bypass         = "AzureServices"
-  #   default_action = "Allow"
-  #   //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
-  # }
+   network_acls {
+     bypass         = "AzureServices"
+     default_action = "Allow"
+    //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
+   }
 }

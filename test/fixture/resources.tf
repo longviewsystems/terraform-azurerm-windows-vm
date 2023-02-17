@@ -28,7 +28,7 @@ resource "azurerm_resource_group" "fixture" {
 
 resource "azurerm_virtual_network" "fixture" {
   name                = module.naming.virtual_network.name_unique
-  address_space       = ["10.0.0.0/16"]
+  address_space       = ["10.30.0.0/16"]
   location            = azurerm_resource_group.fixture.location
   resource_group_name = azurerm_resource_group.fixture.name
   tags                = var.tags
@@ -38,7 +38,7 @@ resource "azurerm_subnet" "fixture_sn1" {
   name                 = "sn1"
   resource_group_name  = azurerm_resource_group.fixture.name
   virtual_network_name = azurerm_virtual_network.fixture.name
-  address_prefixes     = ["10.0.1.0/24"]
+  address_prefixes     = ["10.30.1.0/24"]
 
 }
 
@@ -84,10 +84,11 @@ resource "azurerm_key_vault" "fixture" {
   tenant_id                   = data.azurerm_client_config.current.tenant_id
   soft_delete_retention_days  = 7
   purge_protection_enabled    = false
+  #public_network_access_enabled = true
 
   sku_name = "standard"
 
-  access_policy {
+  /*access_policy {
     tenant_id = data.azurerm_client_config.current.tenant_id
     object_id = data.azurerm_client_config.current.object_id
 
@@ -102,11 +103,11 @@ resource "azurerm_key_vault" "fixture" {
     storage_permissions = [
       "Get",
     ]
-  }
+  }*/
 
-  network_acls {
-    bypass         = "AzureServices"
-    default_action = "Allow"
-    //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
-  }
+  # network_acls {
+  #   bypass         = "AzureServices"
+  #   default_action = "Allow"
+  #   //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
+  # }
 }

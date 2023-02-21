@@ -12,7 +12,7 @@ module "vm_test_1" {
   location            = var.location
 
 
-  admin_password                       = "Test@123" #blank means randomize it in the module.
+  admin_password                       = "" #blank means randomize it in the module.
   subnet_id                            = azurerm_subnet.fixture_sn1.id
   backup_vault_enabled                 = false
   use_dynamic_plan                     = false

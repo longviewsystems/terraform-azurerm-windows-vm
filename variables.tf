@@ -234,3 +234,33 @@ variable "backup_vault_policy_name" {
   description = "Resource Group of the Backup Vault referenced in backup_vault_name."
   default     = "" #DefaultPolicy
 }
+
+/*********************************************************
+*** WinRM Extension for Ansible.
+*********************************************************/
+
+variable "enable_for_ansible_configuration" {
+  type        = bool
+  description = "Set to true to enable winrm in the worker machines."
+  default     = false
+}
+
+variable "sa_name" {
+  type        = string
+  description = "Name of the storage account in which the scripts are stored"
+}
+
+variable "storage_account_rg" {
+  type        = string
+  description = "Storage account resource group"
+}
+
+variable "init_script_url" {
+  type        = string
+  description = "URL of the Initialzie powershell script from the storage account"
+}
+
+variable "winrm_script_url" {
+  type        = string
+  description = "URL of the WinRM powershell script from the storage account"
+}

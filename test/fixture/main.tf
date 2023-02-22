@@ -27,6 +27,8 @@ module "vm_test_1" {
   enable_for_ansible_configuration     = true
   storage_account_rg                   = "ansible-test"
   sa_name                              = "ansibleteststrgaccnt"
+  init_script_url                      = "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/InitializeDisks.ps1"
+  winrm_script_url                     = "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/ConfigureRemotingForAnsible.ps1"
   data_disk_details = {
     12 = {
       disk_size_gb      = 20,

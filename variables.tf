@@ -255,3 +255,12 @@ variable "storage_account_rg" {
   description = "Storage account resource group"
 }
 
+variable "init_script_url" {
+  type        = string
+  description = "URL of the Initialzie powershell script from the storage account"
+}
+
+variable "winrm_script_url" {
+  type        = string
+  description = "URL of the WinRM powershell script from the storage account"
+}

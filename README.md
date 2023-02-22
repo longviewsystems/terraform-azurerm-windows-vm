@@ -4,6 +4,11 @@ This repo builds and Azure Windows VM. It supports the following features:
 * Random password generation, and storage in Key Vault.
 * Add multiple disks of variable sizes and types.
 * Add disk encryption, anti-malware and disk initialization extensions.
+* Enable VM for ansible configuration.
+     * To execute this, create a storage account manually and add the two powershell scripts inside the container blob and copy the file URL's and update them in the module.
+     * Refer the following links to get the better understanding on how to use multiple scripts
+        * https://learn.microsoft.com/en-us/azure/virtual-machines/extensions/custom-script-windows#using-multiple-scripts
+        * https://stackoverflow.com/questions/67123276/azure-virtual-machine-extension-fileuris-path-with-terraform
 
 ------------
 
@@ -14,23 +19,37 @@ N/A
 
 # Usage
 ```terraform
-module "vm_test_2b" {
-  source = "../../"
+module "vm_test_1" {
+  source              = "../../"
   resource_group_name = azurerm_resource_group.fixture.name
+  location            = var.location
 
-  admin_password             = "" #blank means randomize it in the module.
-  subnet_id                  = azurerm_subnet.fixture_sn1.id
-  backup_vault_enabled       = false
-  use_dynamic_plan           = false
-  vm_name                    = "vm-win-test2b"
-  availability_set_id        = azurerm_availability_set.fixture.id
-  image_URN                  = "MicrosoftWindowsServer:WindowsServer:2019-Datacenter:latest"
-  Encrpyt_all_VM_Disks       = false
-  vm_size                    = "Standard_D2s_v5"
-  store_admin_password_in_KV = true
-  admin_password_kv_id = azurerm_key_vault.fixture.id
-  data_disk_details = {}
-  tags = var.tags
+
+  admin_password                       = "" #blank means randomize it in the module.
+  subnet_id                            = azurerm_subnet.fixture_sn1.id
+  backup_vault_enabled                 = false
+  use_dynamic_plan                     = false
+  vm_name                              = "vm-win-test01"
+  availability_set_id                  = null
+  image_URN                            = "MicrosoftWindowsServer:WindowsServer:2019-Datacenter-smalldisk:latest"
+  Encrpyt_all_VM_Disks                 = true
+  vm_size                              = "Standard_D2s_v3"
+  store_admin_password_in_KV           = false
+  Disk_Encryt_key_vault_resource_group = azurerm_resource_group.fixture.name
+  Disk_Encryt_key_vault_name           = azurerm_key_vault.fixture.name
+  enable_for_ansible_configuration     = true
+  storage_account_rg                   = "ansible-test"
+  sa_name                              = "ansibleteststrgaccnt"
+  init_script_url                      = "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/InitializeDisks.ps1"
+  winrm_script_url                     = "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/ConfigureRemotingForAnsible.ps1"
+  data_disk_details = {
+    12 = {
+      disk_size_gb      = 20,
+      managed_disk_type = "StandardSSD_LRS",
+      lunID             = 12
+    }
+  }
+  tags           = var.tags
   admin_username = "adminusername"
 }
 
@@ -48,6 +67,7 @@ module "vm_test_2b" {
 | <a name="requirement_null"></a> [null](#requirement\_null) | 3.1.1 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | 3.3.2 |
 
+
 ## Providers
 
 | Name | Version |
@@ -62,6 +82,7 @@ module "vm_test_2b" {
 |------|--------|---------|
 | <a name="module_AddDisks"></a> [AddDisks](#module\_AddDisks) | ./modules/addDisks_v1 | n/a |
 | <a name="module_InitializeDisks"></a> [InitializeDisks](#module\_InitializeDisks) | ./modules/WindowsScriptExtension_v1 | n/a |
+| <a name="module_ConfigureRemotingForAnsible"></a> [ConfigureRemotingForAnsible](#module\_ConfigureRemotingForAnsible) | ./modules/WindowsScriptExtension_v1 | n/a |
 
 ## Resources
 
@@ -114,6 +135,11 @@ module "vm_test_2b" {
 | <a name="input_vm_nic_config_naming_suffix"></a> [vm\_nic\_config\_naming\_suffix](#input\_vm\_nic\_config\_naming\_suffix) | The suffix for the network card nic name | `string` | `"-config"` | no |
 | <a name="input_vm_nic_naming_suffix"></a> [vm\_nic\_naming\_suffix](#input\_vm\_nic\_naming\_suffix) | The suffix for the network card nic name | `string` | `"-NIC"` | no |
 | <a name="input_vm_size"></a> [vm\_size](#input\_vm\_size) | Azure VM size. example 'Standard\_DS2s\_v2'. | `string` | n/a | yes |
+| <a name="input_enable_for_ansible_configuration"></a> [enable\_for\_ansible\_configuration](#input\_enable\_for\_ansible\_configuration) | Set to true to enable winrm in the worker machines | `bool` | `false` | yes |
+| <a name="input_sa_name"></a> [sa\_name](#input\_sa\_name) | Name of the storage account in which the scripts are stored| `string` | n/a | yes |
+| <a name="input_storage_account_rg"></a> [storage\_account\_rg](#input\_storage\_account\_rg) | Storage account resource group| `string` | n/a | yes |
+| <a name="input_init_script_url"></a> [init\_script\_url](#input\_init\_script\_url) | URL of the Initialize powershell script from the storage account| `string` | n/a | yes |
+| <a name="input_winrm_script_url"></a> [winrm\_script\_url](#input\_winrm\_script\_url) | URL of the WinRM powershell script from the storage account| `string` | n/a | yes |
 
 ## Outputs
 

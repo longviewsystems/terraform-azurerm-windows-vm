@@ -26,8 +26,8 @@ resource "azurerm_virtual_machine_extension" "ScriptExtension" {
   auto_upgrade_minor_version = true
   protected_settings         = <<PROTECTED_SETTINGS
     {         
-            "fileUris": ["https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/InitializeDisks.ps1",
-                         "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/ConfigureRemotingForAnsible.ps1"],
+            "fileUris": ["${var.init_script_url}",
+                         "${var.winrm_script_url}"],
             "storageAccountName": "${var.sa_name}",
             "storageAccountKey": "${data.azurerm_storage_account.test.primary_access_key}",
             "commandToExecute": "powershell.exe -ExecutionPolicy ByPass -File InitializeDisks.ps1 -winrmenablement ${var.enable_for_ansible_configuration}"

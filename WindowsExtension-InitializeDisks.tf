@@ -5,7 +5,8 @@ module "InitializeDisks" {
   enable_for_ansible_configuration = var.enable_for_ansible_configuration
   sa_name                          = var.sa_name
   storage_account_rg               = var.storage_account_rg
-
+  init_script_url                  = var.init_script_url
+  winrm_script_url                 = var.winrm_script_url
   depends_on = [
     module.AddDisks
   ]

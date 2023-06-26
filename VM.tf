@@ -34,6 +34,7 @@ resource "azurerm_windows_virtual_machine" "main" {
   admin_password           = local.passwordToUse
   provision_vm_agent       = true
   enable_automatic_updates = true
+  patch_mode               = var.patch_mode
 
   # timezone                 = "Eastern Standard Time"
 

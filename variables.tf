@@ -264,3 +264,9 @@ variable "winrm_script_url" {
   type        = string
   description = "URL of the WinRM powershell script from the storage account"
 }
+
+variable "patch_mode" {
+  type        = string
+  description = "Specifies the mode of in-guest patching to this Windows Virtual Machine. Possible values are `Manual`, `AutomaticByOS` and `AutomaticByPlatform`"
+  default     = "AutomaticByPlatform"
+}

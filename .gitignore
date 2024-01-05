@@ -33,4 +33,4 @@ terraform.rc
 .terraform.lock.hcl
 
 #docker
-.devcontainer
+#.devcontainer

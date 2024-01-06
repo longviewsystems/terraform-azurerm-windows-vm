@@ -71,7 +71,7 @@ module "vm_test_1" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | >=3.0.0, <=4.0.0 |
+| <a name="provider_azurerm"></a> [azurerm](#provider\_azurerm) | 3.86.0 |
 | <a name="provider_null"></a> [null](#provider\_null) | 3.1.1 |
 | <a name="provider_random"></a> [random](#provider\_random) | 3.3.2 |
 

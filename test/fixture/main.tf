@@ -19,12 +19,12 @@ module "vm_test_1" {
   vm_name                              = "vm-win-test01"
   availability_set_id                  = null
   image_URN                            = "MicrosoftWindowsServer:WindowsServer:2019-Datacenter-smalldisk:latest"
-  Encrpyt_all_VM_Disks                 = true
+  Encrpyt_all_VM_Disks                 = false
   vm_size                              = "Standard_D2s_v3"
   store_admin_password_in_KV           = false
   Disk_Encryt_key_vault_resource_group = azurerm_resource_group.fixture.name
   Disk_Encryt_key_vault_name           = azurerm_key_vault.fixture.name
-  enable_for_ansible_configuration     = true
+  enable_for_ansible_configuration     = false
   storage_account_rg                   = "ansible-test"
   sa_name                              = "ansibleteststrgaccnt"
   init_script_url                      = "https://ansibleteststrgaccnt.blob.core.windows.net/winrmext/InitializeDisks.ps1"

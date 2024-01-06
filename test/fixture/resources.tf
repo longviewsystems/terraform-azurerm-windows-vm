@@ -4,7 +4,7 @@
 
 module "naming" {
   source  = "Azure/naming/azurerm"
-  version = "0.1.1"
+  version = "0.4.0"
   prefix  = ["mod", "test"]
   # suffix = random_string.random.value
 
@@ -105,9 +105,9 @@ resource "azurerm_key_vault" "fixture" {
     ]
   }
 
-   network_acls {
-     bypass         = "AzureServices"
-     default_action = "Allow"
+  network_acls {
+    bypass         = "AzureServices"
+    default_action = "Allow"
     //virtual_network_subnet_ids = [azurerm_subnet.fixture_sn1.id]
-   }
+  }
 }

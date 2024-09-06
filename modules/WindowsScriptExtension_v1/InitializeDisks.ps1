@@ -6,5 +6,6 @@ Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR 
 
 if ( $winrmenablement -match 'true' )
 { 
-  .\ConfigureRemotingForAnsible.ps1
+  .\ConfigureRemotingForAnsible.ps1 -EnableCredSSP -DisableBasicAuth -ForceNewSSLCert -verbose
+  restart-service winrm
 }
